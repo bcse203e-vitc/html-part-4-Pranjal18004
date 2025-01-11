@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Page Job Application Form</title>
+    <style>
+        .form-page {
+            display: none;
+        }
+        .form-page.active {
+            display: block;
+        }
+        .navigation-buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form id="applicationForm">
+        <!-- Page 1: Personal Details -->
+        <div class="form-page active" id="page1">
+            <h2>Personal Details</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required><br><br>
+
+            <label for="contact">Contact Info:</label>
+            <input type="tel" id="contact" name="contact" required><br><br>
+        </div>
+
+        <!-- Page 2: Educational Background -->
+        <div class="form-page" id="page2">
+            <h2>Educational Background</h2>
+            <label for="degree">Degree:</label>
+            <input type="text" id="degree" name="degree" required><br><br>
+
+            <label for="year">Year of Passing:</label>
+            <input type="number" id="year" name="year" required><br><br>
+
+            <label for="institution">Institution Name:</label>
+            <input type="text" id="institution" name="institution" required><br><br>
+        </div>
+
+        <!-- Page 3: Work Experience -->
+        <div class="form-page" id="page3">
+            <h2>Work Experience</h2>
+            <label for="company">Company Name:</label>
+            <input type="text" id="company" name="company" required><br><br>
+
+            <label for="designation">Designation:</label>
+            <input type="text" id="designation" name="designation" required><br><br>
+
+            <label for="duration">Duration:</label>
+            <input type="text" id="duration" name="duration" required><br><br>
+
+            <label for="resume">Upload Resume:</label>
+            <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required><br><br>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button type="button" id="prevButton" onclick="navigate(-1)" disabled>Previous</button>
+            <button type="button" id="nextButton" onclick="navigate(1)">Next</button>
+            <button type="submit" id="submitButton" style="display: none;">Submit</button>
+        </div>
+    </form>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 3;
+
+        function navigate(direction) {
+            // Hide current page
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+
+            // Update current page index
+            currentPage += direction;
+
+            // Show new page
+            document.getElementById(`page${currentPage}`).classList.add('active');
+
+            // Update button states
+            document.getElementById('prevButton').disabled = currentPage === 1;
+            document.getElementById('nextButton').style.display = currentPage === totalPages ? 'none' : 'inline';
+            document.getElementById('submitButton').style.display = currentPage === totalPages ? 'inline' : 'none';
+        }
+    </script>
+</body>
+</html>
